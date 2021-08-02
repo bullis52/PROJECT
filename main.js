@@ -2,35 +2,46 @@
 //1 получить массив объектов user с endpoint`а https://jsonplaceholder.typicode.com/users
 //2 Вывести id,name всех user в index.html. Отдельный блок для каждого user.
 //3 Добавить каждому блоку кнопку/ссылку , при клике на которую происходит переход на страницу user-details.html, которая имеет детальную информацию про объект на который кликнули
+// fetch('https://jsonplaceholder.typicode.com/users')
+//     .then(value => value.json())
+//     .then(users => {
+//         for (let user of users) {
+//             let userDiv = document.createElement('div');
+//             let a = document.createElement('a');
+//             let block = document.createElement('div')
+//
+//             let p = document.createElement('p')
+//             userDiv.append(p)
+//             userDiv.append(a)
+//             userDiv.append(block)
+//             a.innerText = 'press'
+//             //btn.innerText = 'press'
+//             //document.createElement('index.html')
+//             p.innerText = `${user.id} ${user.name}`
+//             a.onclick = function () {
+//                 a.href = 'user-details.html'
+//             }
+//             let target = document.getElementById('target');
+//             target.append(userDiv);
+//         }})
+const mainDiv = document.getElementById('users');
+
 fetch('https://jsonplaceholder.typicode.com/users')
     .then(value => value.json())
     .then(users => {
-        for (let user of users) {
+        for (const user of users) {
             let userDiv = document.createElement('div');
-            let btn = document.createElement('button');
-            let block = document.createElement('div')
+            let detailsLink = document.createElement('a');
 
-            let p = document.createElement('p')
-            userDiv.append(p)
-            userDiv.append(btn)
-            userDiv.append(block)
-            btn.innerText = 'press'
-            p.innerText = `${user.id} ${user.name} ${user.username}`
-            btn.onclick = function () {
-                fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
-                    .then(value => value.json())
-                    .then(posts => {
-                        block.innerHTML = ''
-                        for (const post of posts) {
-                            let li = document.createElement('li')
-                            block.appendChild(li)
-                            li.innerText = `${post.title}`
-                        }
-                    })
-            }
-            let target = document.getElementById('target');
-            target.append(userDiv);
-        }})
+            userDiv.innerText = user.name;
+            detailsLink.innerText = 'Get info';
+
+            detailsLink.href = `user-d.html?user=${JSON.stringify(user)}`;
+
+            userDiv.appendChild(detailsLink);
+            mainDiv.appendChild(userDiv);
+        }
+    });
 
 //На странице user-details.html:
 //4 Вывести всю, без исключения, информацию про объект user на кнопку/ссылку которого был совершен клик ранее.
