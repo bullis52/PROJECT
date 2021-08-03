@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="block"></div>
+<div id="posts"></div>
+<script>
+    const JOSINUSer = new URL(location).searchParams.get('user');
+    const user = JSON.parse(JOSINUSer);
+    const block = document.getElementById('block')
+    let h2 = document.createElement('h2')
+    let h3 = document.createElement('h3')
+    let p = document.createElement('p')
+    let p2 = document.createElement('p')
+    let p3 = document.createElement('p')
+    block.appendChild(h2)
+    block.appendChild(h3)
+    block.appendChild(p)
+    block.appendChild(p2)
+    block.appendChild(p3)
+    h2.innerText =`${user.id}`
+    h3.innerText = `${user.name} ${user.username}`
+    p.innerText =  `${user.email}`
+    p2.innerText =  `${user.address.street}
+    ${user.address.suite}
+    ${user.address.city}`
+    p3.innerText = `${user.address.zipcode}
+     ${user.address.geo.lat}`
+    // block.innerText = `${user.id} ${user.name} ${user.username} ${user.email} ${user.address.street}
+    // ${user.address.suite} ${user.address.city} ${user.address.zipcode}
+    // ${user.address.geo.lat}`
+
+
+
+    const mainDiv1 = document.getElementById('posts');
+    fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
+        .then(value => value.json())
+        .then(posts => {
+            let userDiv1 = document.createElement('div');
+            let detailsLink1 = document.createElement('a');
+            detailsLink1.classList.add('aposts')
+            for (const post of posts) {
+                detailsLink1.innerText = 'post of current user';
+                //userDiv1.innerText = post.title;
+                detailsLink1.href = `post-details.html?post=${JSON.stringify(post)}`;
+
+                userDiv1.appendChild(detailsLink1);
+                mainDiv1.appendChild(userDiv1);
+            }
+        });
+</script>
+</body>
+</html>
