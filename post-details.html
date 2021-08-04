@@ -6,50 +6,60 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="block1"></div>
+<div id="block"></div>
 <div id="block2"></div>
 <script>
     const JOSINUSer = new URL(location).searchParams.get('post');
     const post = JSON.parse(JOSINUSer);
-    const block = document.getElementById('block1')
+    const block = document.getElementById('block')
 
     const JOSINUSer1 = new URL(location).searchParams.get('comment');
     const comment = JSON.parse(JOSINUSer1);
-    const block1 = document.getElementById('block2')
     const h2 = document.createElement('h2')
     const h3 = document.createElement('h3')
     const p = document.createElement('p')
+    const p2 = document.createElement('p')
     block.append(h2)
     block.append(h3)
     block.append(p)
+    block.append(p2)
     h2.classList.add('h2post')
     h3.classList.add('h3post')
     p.classList.add('pPost')
-    h2.innerText = `${post.userId}`
-    h3.innerText = `
-     ${post.id}
-      ${post.title}`
-        p.innerText = `${post.body}`
-    fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
-        .then(value => value.json())
-        .then(comments => {
-            const h2 = document.createElement('h2')
-            const h3 = document.createElement('h3')
-            const p = document.createElement('p')
-            const a = document.createElement('a')
-            const p2 = document.createElement('p')
-            h2.classList.add('h2post')
-            h3.classList.add('h3post')
-            p.classList.add('pPost')
-            p2.classList.add('pPost')
-            a.classList.add('pPost')
-            block1.append(h2)
-            block1.append(h3)
-            block1.append(p)
-            block1.append(a)
-            block1.append(p2)
-            a.href = ''
-            for (const comment of comments) {
+    h2.innerText = `user Id ${post.userId}`
+    h3.innerText = `post Id ${post.id}`
+    p.innerText = `Title of post - ${post.title}`
+    p2.innerText = `${post.body}`
+
+    const btn = document.createElement('button')
+    btn.innerText = 'comment of post'
+    block.append(btn)
+
+    const block1 = document.getElementById('block2')
+    btn.onclick = function () {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
+            .then(value => value.json())
+            .then(comments => {
+                for (const comment of comments) {
+                    const itemBlock = document.createElement('div')
+                    block1.appendChild(itemBlock)
+                    itemBlock.classList.add('item-block')
+                    const h2 = document.createElement('h2')
+                    const h3 = document.createElement('h3')
+                    const p = document.createElement('p')
+                    const a = document.createElement('a')
+                    const p2 = document.createElement('p')
+                    h2.classList.add('h2post')
+                    h3.classList.add('h3post')
+                    p.classList.add('pPost')
+                    p2.classList.add('pPost')
+                    a.classList.add('pPost')
+                    itemBlock.append(h2)
+                    itemBlock.append(h3)
+                    itemBlock.append(p)
+                    itemBlock.append(a)
+                    itemBlock.append(p2)
+                    a.href = ''
                     h2.innerText = `${comment.postId}`
                     h3.innerText = `${comment.id}`
                     p.innerText = `${comment.name}`
@@ -57,12 +67,7 @@
                     p2.innerText = `${comment.body}`
                 }
             });
-
-    // block1.innerText = `${comment.postId}
-    //     ${comment.id}
-    //     ${comment.name}
-    //     ${comment.email}
-    //     ${comment.body}`
+    }
 </script>
 </body>
 </html>

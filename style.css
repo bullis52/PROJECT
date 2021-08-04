@@ -2,6 +2,11 @@ body{
     font-family: sans-serif;
     background-color: #CA3B48;
 }
+h1{
+    margin: 0 0 0 45.5%;
+    color: #ffffff;
+    text-transform: uppercase;
+}
 a{
     color: #ffffff;
 }
@@ -14,42 +19,101 @@ h3{
 p{
     color: #ffffff;
 }
+
 #users{
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
-    max-width: 900px;
 }
 #users div{
-    width: 400px;
-    height:100px;
-    white-space: nowrap;
-}
-#block{
+    height: 100px;
+    width: 43%;
+    background-color: #6a63e4;
+    margin: 50px;
     display: flex;
     flex-direction: column;
-    min-height: 90%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
 }
 
-.aposts{
-    margin: 0 0 0 43%;
+
+#block{
+    margin: 0 0 0 35%;
+    width: 300px;
+    background-color: #6a63e4;
+    padding: 50px;
+    border-radius: 10px;
+}
+#posts{
+    display: flex;
+    flex-wrap: wrap;
+}
+.btnpost{
+    width: 90%;
+    padding: 20px 0;
+    margin: 100px 0 0 5%;
     font-size: 20px;
-    background-color: black;
+    text-transform: uppercase;
+    background-color: fuchsia;
+    color: #ffffff;
+}
+.btnpost:hover{
+    background-color: #6a63e4;
+}
+.postDiv{
+    background-color: #6a63e4;
+    width: 12%;
+    margin: 50px;
     padding: 10px;
     border-radius: 10px;
 }
-.h2post{
+#block2{
+    display: flex;
+    flex-wrap: wrap;
+}
+.item-block{
+    background-color: #6a63e4;
+    width: 21%;
+    border-radius: 10px;
     margin: 20px;
-    font-size: 30px;
+    padding: 10px;
 }
-.h3post{
-    font-size: 20px;
-    margin: 0 0 50px 20px;
-}
-.pPost{
-    margin: 20px;
-    border-bottom: 0px solid yellow;
-}
-.pPost:last-child{
-    border-bottom: 5px solid yellow;
-}
+
+
+
+
+
+
+
+
+
+
+
+/*#block{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    min-height: 90%;*/
+/*}*/
+
+/*.aposts{*/
+/*    margin: 0 0 0 43%;*/
+/*    font-size: 20px;*/
+/*    background-color: black;*/
+/*    padding: 10px;*/
+/*    border-radius: 10px;*/
+/*}*/
+/*.h2post{*/
+/*    margin: 20px;*/
+/*    font-size: 30px;*/
+/*}*/
+/*.h3post{*/
+/*    font-size: 20px;*/
+/*    margin: 0 0 50px 20px;*/
+/*}*/
+/*.pPost{*/
+/*    margin: 20px;*/
+/*    border-bottom: 0px solid yellow;*/
+/*}*/
+/*.pPost:last-child{*/
+/*    border-bottom: 5px solid yellow;*/
+/*}*/

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<h1>posts</h1>
 <div id="block"></div>
 <div id="posts"></div>
 <script>
@@ -22,36 +23,46 @@
     block.appendChild(p)
     block.appendChild(p2)
     block.appendChild(p3)
-    h2.innerText =`${user.id}`
-    h3.innerText = `${user.name} ${user.username}`
-    p.innerText =  `${user.email}`
-    p2.innerText =  `${user.address.street}
+    h2.innerText =` User Id  ${user.id}`
+    h3.innerText = `Name:${user.name} ${user.username}`
+    p.innerText =  `Email:${user.email}`
+    p2.innerText =  `Adress:
+    ${user.address.street}
     ${user.address.suite}
     ${user.address.city}`
-    p3.innerText = `${user.address.zipcode}
+    p3.innerText = `Zipcode:
+    ${user.address.zipcode}
      ${user.address.geo.lat}`
     // block.innerText = `${user.id} ${user.name} ${user.username} ${user.email} ${user.address.street}
     // ${user.address.suite} ${user.address.city} ${user.address.zipcode}
     // ${user.address.geo.lat}`
 
 
-
     const mainDiv1 = document.getElementById('posts');
-    fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
-        .then(value => value.json())
-        .then(posts => {
-            let userDiv1 = document.createElement('div');
-            let detailsLink1 = document.createElement('a');
-            detailsLink1.classList.add('aposts')
-            for (const post of posts) {
-                detailsLink1.innerText = 'post of current user';
-                //userDiv1.innerText = post.title;
-                detailsLink1.href = `post-details.html?post=${JSON.stringify(post)}`;
+    const btn = document.createElement('button')
+    btn.innerText = 'click'
+    btn.classList.add('btnpost')
+    mainDiv1.appendChild(btn)
 
-                userDiv1.appendChild(detailsLink1);
-                mainDiv1.appendChild(userDiv1);
-            }
-        });
+    btn.onclick = function () {
+        fetch(`https://jsonplaceholder.typicode.com/users/${user.id}/posts`)
+            .then(value => value.json())
+            .then(posts => {
+                for (const post of posts) {
+                    let detailsLink1 = document.createElement('a');
+                    detailsLink1.classList.add('aposts')
+                    let userDiv1 = document.createElement('div');
+                    userDiv1.classList.add('postDiv')
+                    detailsLink1.innerText = 'post of current user';
+                    detailsLink1.href = `post-details.html?post=${JSON.stringify(post)}`;
+                    const h3 = document.createElement('h3')
+                    userDiv1.appendChild(h3)
+                    userDiv1.appendChild(detailsLink1)
+                    h3.innerText = `${post.id} ${post.title}`
+                     mainDiv1.appendChild(userDiv1);
+                }
+            });
+    }
 </script>
 </body>
 </html>
